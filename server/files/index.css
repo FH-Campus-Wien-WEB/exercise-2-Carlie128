@@ -39,3 +39,70 @@ select {
 textarea {
   width: 100%;
 }
+
+.container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body {
+            background-color: powderblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            color: rgb(9, 2, 32);
+        }
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            color: rgb(19, 12, 66);
+            padding-left: 0;
+        }
+
+        article.movie {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        section {
+            font-family: 'Courier New', Courier, monospace;
+            color: slateblue;
+        }
+
+        p {
+            font-family: 'Courier New', Courier, monospace;
+            color: slateblue;
+            padding-left: 0;
+        }
+
+        img {
+            width: 250px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        p.movie-plot {
+            width: 80%;
+            font-style: italic;
+            color: darkslategray;
+            white-space: normal;
+            word-break: break-word;
+            text-align: center;
+        }
+
+        section.movie-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 20px auto;
+        }

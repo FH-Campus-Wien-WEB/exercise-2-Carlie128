@@ -8,4 +8,24 @@ button {
     border-width: 1px;
     border-radius: 4px;
     font-size: 110%;
+    background-color: rgb(53, 27, 107);
+    color: white;
+    cursor: pointer;
+}
+.container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #7ec175;
+    }
+
+
+body {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
