@@ -10,7 +10,7 @@ img {
 }
 
 article {
-  background-color: lightgray;
+  background-color: rgb(159, 154, 164);
   border-radius: 16px;
   padding: 16px;
   margin: 2vw;
@@ -48,7 +48,7 @@ textarea {
         }
 
         body {
-            background-color: powderblue;
+            background-color: rgb(227, 236, 238);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -61,41 +61,50 @@ textarea {
 
         h2 {
             font-family: 'Courier New', Courier, monospace;
-            color: rgb(19, 12, 66);
+            color: rgb(0, 0, 0);
             padding-left: 0;
         }
 
         article.movie {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            align-items: flex-start;
             margin-bottom: 40px;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .movie-left {
+            flex: 1;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .movie-right {
+            flex: 2;
         }
 
         section {
             font-family: 'Courier New', Courier, monospace;
-            color: slateblue;
+            color: rgb(218, 218, 221);
         }
 
         p {
             font-family: 'Courier New', Courier, monospace;
-            color: slateblue;
+            color: rgb(0, 0, 0);
             padding-left: 0;
         }
 
         img {
-            width: 250px;
+            width: 200px;
             height: auto;
-            border-radius: 50%;
+            border-radius: 12px;
         }
 
-        p.movie-plot {
-            width: 80%;
-            font-style: italic;
-            color: darkslategray;
-            white-space: normal;
-            word-break: break-word;
-            text-align: center;
+        .edit-button {
+            display: block;
+            margin: 10px auto;
+            width: fit-content;
         }
 
         section.movie-details {

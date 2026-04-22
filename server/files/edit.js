@@ -5,9 +5,8 @@ function setMovie(movie) {
 
     if (name === "Genres") {
       const options = element.options;
-      for (let index = 0; index < options.length; index++) {
-        const option = options[index];
-        option.selected = value.indexOf(option.value) >= 0;
+      for (let i = 0; i < options.length; i++) {
+        options[i].selected = value.indexOf(options[i].value) >= 0;
       }
     } else {
       element.value = value;
@@ -59,23 +58,50 @@ function getMovie() {
 }
 
 function putMovie() {
-  /* Task 3.3. 
-    - Get the movie data using getMovie()
-    - Configure the XMLHttpRequest to make a PUT to /movies/:imdbID
-    - Set the 'Content-Type' appropriately for JSON data
-    - Configure the function below as the onload event handler
-    - Send the movie data as JSON
-  */
+  const movie = getMovie();
 
   const xhr = new XMLHttpRequest();
+
+  xhr.open("PUT", "/movies/" + movie.imdbID);
+
+  xhr.setRequestHeader("Content-Type", "application/json");
+
   xhr.onload = function () {
-    if (xhr.status == 200 || xhr.status === 204) {
+    if (xhr.status === 200 || xhr.status === 204) {
       location.href = "index.html";
     } else {
       alert("Saving of movie data failed. Status code was " + xhr.status);
     }
   };
+
+  console.log("PUT movie:", getMovie());
+
+  xhr.send(JSON.stringify(movie));
 }
+
+function postMovie() {
+  const movie = getMovie();
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/movies");
+
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 201) {
+      location.href = "index.html";
+    } else {
+      alert("Saving of movie data failed. Status code was " + xhr.status);
+    }
+  };
+
+  console.log("POST movie:", getMovie());
+
+  xhr.send(JSON.stringify(movie));
+}
+
+
 
 /** Loading and setting the movie data for the movie with the passed imdbID */
 const imdbID = new URLSearchParams(window.location.search).get("imdbID");
@@ -96,4 +122,3 @@ xhr.onload = function () {
 };
 
 xhr.send();
-
