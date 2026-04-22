@@ -1,7 +1,7 @@
 const movieModel = {
   "tt0084787": {
     "imdbID": "tt0084787",
-    "Title": "The Thing",
+    "Title": "The Things",
     "Released": "1982-06-25",
     "Runtime": 109,
     "Genres": [
@@ -24,7 +24,7 @@ const movieModel = {
     "Plot": "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
     "Poster": "https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
     "Metascore": 57,
-    "imdbRating": 8.2,
+    "imdbRating": 8.4,
     "saveButton": "undefined",
     "cancelButton": "undefined"
   },
@@ -79,6 +79,28 @@ const movieModel = {
     "Poster": "./TheMatrix.png",
     "Metascore": 73,
     "imdbRating": 8.7
+  },
+  "tt6892926": {
+    "imdbID": "tt6892926",
+    "Title": "test",
+    "Released": "",
+    "Runtime": 0,
+    "Genres": [],
+    "Directors": [
+      ""
+    ],
+    "Writers": [
+      ""
+    ],
+    "Actors": [
+      ""
+    ],
+    "Plot": "Die ist mein Toller Test",
+    "Poster": "",
+    "Metascore": 0,
+    "imdbRating": 0,
+    "saveButton": "",
+    "cancelButton": ""
   }
 };
 

@@ -110,6 +110,7 @@ const xhr = new XMLHttpRequest();
 xhr.open("GET", "/movies/" + imdbID);
 xhr.onload = function () {
   if (xhr.status === 200) {
+    console.log(xhr.responseText);
     setMovie(JSON.parse(xhr.responseText));
   } else {
     alert(
