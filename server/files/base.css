@@ -1,33 +1,22 @@
 body {
   font-family: "Trebuchet MS", sans-serif;
+  background-color: rgb(98, 21, 113);
+  color: beige;
+}
+
+main {
+  color: #ffffff;
 }
 
 button {
-    padding: 0px 8px;
-    margin-right: 8px;
+    padding: 4px;
     border-width: 1px;
     border-radius: 4px;
-    font-size: 110%;
-    background-color: rgb(34, 54, 93);
-    color: white;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
+    font-size: 105%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(85, 57, 169);
 }
-.container {
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #9dbd99;
-    }
-
-
-body {
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+button:hover {
+  background-color: rgb(113, 93, 172);
 }

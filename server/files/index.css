@@ -1,117 +1,135 @@
 @import url(base.css);
 
 h1 {
-  font-size: 200%;
-  margin: 8px 0px;
+	font-size: 200%;
+	margin: 8px 0px;
 }
 
+/* Constrain the page to the viewport */
+html, body {
+	height: 100vh;
+}
+
+/* Center the nav's header and list */
+nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* navigation buttons have full width */
+nav button {
+	width: 100%;
+}
+
+/* Remove unnecessary space and bullets from the lists */
+ul {
+	padding: 0px;
+	margin: 16px;
+	list-style-type: none;
+}
+
+/* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+header { grid-area: h; }
+nav { grid-area: n; }
+main { 
+	grid-area: m; 
+	overflow-y: auto; 
+}
+footer { grid-area: f; }
+
+body {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto 1fr auto;
+	grid-template-areas:
+		"h"
+		"n"
+		"m"
+		"f";
+}
+
+@media (min-width: 800px) {
+	body {
+		grid-template-columns: 192px 1fr; 
+		grid-template-rows: 64px auto 64px;
+		grid-template-areas:
+			"h h"
+			"n m"
+			"f f";
+	}
+}
+
+/* Task 3.1. Make the header element a flex container and center its children
+	 vertically and horizontally.
+ */
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
+use column direction and center the child items
+*/
+nav ul {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: stretch;
+	padding: 0; /* Clears the annoying default bullet spacing */
+	list-style: none; /* Hides the bullet points just in case */
+}
+
+/* Task 3.3. Make the main element a Flexbox container */
+main {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	justify-content: center;
+}
+
+
+/* Task 3.4. Make the footer's ul a Flexbox container */
+footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+
 img {
-  border-radius: 12px;
+	border-radius: 12px;
 }
 
 article {
-  background-color: rgb(159, 154, 164);
-  border-radius: 16px;
-  padding: 16px;
-  margin: 2vw;
+	background-color: rgb(155, 122, 183);
+	border-radius: 16px;
+	padding: 16px;
+	width: 384px;
+	margin: 8px;
+}
+
+a {
+	color: rgb(243, 220, 245);
 }
 
 span {
-  margin-right: 4px;
+	margin-right: 4px;
 }
 
 .genre {
-  padding: 4px 8px;
-  border: solid black 1px;
-  border-radius: 6px;
-  background-color: darkgray;
-  font-weight: bold;
+	padding: 4px 8px;
+	border: solid black 1px;
+	border-radius: 6px;
+	background-color: rgb(113, 93, 172);
+	font-weight: bold;
 }
 
-input {
-  width: 100%;
+main img {
+	width: 100%;        
+	aspect-ratio: 2 / 3; 
+	object-fit: cover;  
+	border-radius: 50%  
 }
-
-select {
-  width: 100%;
-}
-
-textarea {
-  width: 100%;
-}
-
-.container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body {
-            background-color: rgb(227, 236, 238);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        h1 {
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(9, 2, 32);
-        }
-
-        h2 {
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(0, 0, 0);
-            padding-left: 0;
-        }
-
-        article.movie {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            margin-bottom: 40px;
-            width: 80%;
-            max-width: 1200px;
-        }
-
-        .movie-left {
-            flex: 1;
-            text-align: center;
-            margin-right: 20px;
-        }
-
-        .movie-right {
-            flex: 2;
-        }
-
-        section {
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(218, 218, 221);
-        }
-
-        p {
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(0, 0, 0);
-            padding-left: 0;
-        }
-
-        img {
-            width: 200px;
-            height: auto;
-            border-radius: 12px;
-        }
-
-        .edit-button {
-            display: block;
-            margin: 10px auto;
-            width: fit-content;
-        }
-
-        section.movie-details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            margin: 20px auto;
-        }

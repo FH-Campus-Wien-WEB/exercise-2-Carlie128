@@ -1,90 +1,111 @@
+import { ElementBuilder, ParentChildBuilder } from "./builders.js";
+
+class ParagraphBuilder extends ParentChildBuilder {
+	constructor() {
+		super("p", "span");
+	}
+}
+
+class ListBuilder extends ParentChildBuilder {
+	constructor() {
+		super("ul", "li");
+	}
+}
+
+function formatRuntime(runtime) {
+	const hours = Math.trunc(runtime / 60);
+	const minutes = runtime % 60;
+	return hours + "h " + minutes + "m";
+}
+
+function appendMovie(movie, element) {
+	new ElementBuilder("article").id(movie.imdbID)
+					.append(new ElementBuilder("img").with("src", movie.Poster))
+					.append(new ElementBuilder("h1").text(movie.Title))
+					.append(new ElementBuilder("p")
+							.append(new ElementBuilder("button").text("Edit")
+										.listener("click", () => location.href = "edit.html?imdbID=" + movie.imdbID)))
+					.append(new ParagraphBuilder().items(
+							"Runtime " + formatRuntime(movie.Runtime),
+							"\u2022",
+							"Released on " +
+								new Date(movie.Released).toLocaleDateString("en-US")))
+					.append(new ParagraphBuilder().childClass("genre").items(movie.Genres))
+					.append(new ElementBuilder("p").text(movie.Plot))
+					.append(new ElementBuilder("h2").pluralizedText("Director", movie.Directors))
+					.append(new ListBuilder().items(movie.Directors))
+					.append(new ElementBuilder("h2").pluralizedText("Writer", movie.Writers))
+					.append(new ListBuilder().items(movie.Writers))
+					.append(new ElementBuilder("h2").pluralizedText("Actor", movie.Actors))
+					.append(new ListBuilder().items(movie.Actors))
+					.appendTo(element);
+}
+
+function loadMovies(genre) {
+	const xhr = new XMLHttpRequest();
+	xhr.onload = function () {
+		const mainElement = document.querySelector("main");
+
+		while (mainElement.childElementCount > 0) {
+			mainElement.firstChild.remove()
+		}
+
+		if (xhr.status === 200) {
+			const movies = JSON.parse(xhr.responseText)
+			for (const movie of movies) {
+				appendMovie(movie, mainElement)
+			}
+		} else {
+			mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
+		}
+	}
+
+	const url = new URL("/movies", location.href)
+	/* Task 1.4. Add query parameter to the url if a genre is given */
+	if (genre) {
+		url.searchParams.set("genre", genre);
+	}
+
+	xhr.open("GET", url)
+	xhr.send()
+}
+
 window.onload = function () {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    const bodyElement = document.querySelector("body");
-    if (xhr.status == 200) {
-      const movies = JSON.parse(xhr.responseText);
-       movies.forEach(movie => {
-            const article = document.createElement("article")
-                        article.className = "movie"
+	const xhr = new XMLHttpRequest();
+	xhr.onload = function () {
+		const listElement = document.querySelector("nav>ul");
 
-                        const leftDiv = document.createElement("div")
-                        leftDiv.className = "movie-left"
+		if (xhr.status === 200) {
+			const genres = JSON.parse(xhr.responseText);
+			generateGenresButton(genres);
 
-                        const heading = document.createElement("h2")
-                        heading.textContent = movie.Title
-                        leftDiv.appendChild(heading)
-
-                        const poster = document.createElement("img")
-                        poster.src = movie.Poster
-                        poster.alt = `Poster for ${movie.Title}`;
-                        leftDiv.appendChild(poster)
-
-                        article.appendChild(leftDiv)
-
-                        const rightDiv = document.createElement("div")
-                        rightDiv.className = "movie-right"
-
-                        const details = document.createElement("section");
-                        details.className = "movie-details";
-
-                        function addRow(label, value) 
-                        {
-                            const p = document.createElement("p");
-
-                            const strong = document.createElement("strong");
-                            strong.textContent = label + ": ";
-
-                            const text = document.createTextNode(value ?? "");
-
-                            p.appendChild(strong);
-                            p.appendChild(text);
-
-                            details.appendChild(p);
-                        }
-
-                          addRow("Released", movie.Released);
-                          addRow("Runtime", movie.Runtime + " min");
-                          addRow("Genre", movie.Genres ? movie.Genres.join(", ") : "");
-                          addRow("Directors", movie.Directors ? movie.Directors.join(", ") : "");
-                          addRow("Writers", movie.Writers ? movie.Writers.join(", ") : "");
-                          addRow("Actors", movie.Actors ? movie.Actors.join(", ") : "");
-                          addRow("Metascore", movie.Metascore);
-                          addRow("IMDb Rating", movie.imdbRating);
-
-                          rightDiv.appendChild(details);
-
-                        const plot = document.createElement("p")
-                        plot.className = "movie-plot"
-                        plot.textContent = movie.plot || movie.Plot || "No plot available."
-                        rightDiv.appendChild(plot)
-
-                        const editButton = document.createElement('button')
-                        editButton.textContent = 'Edit'
-                        editButton.onclick = function() {
-                          location.href = 'edit.html?imdbID=' + movie.imdbID
-                        }
-                        rightDiv.appendChild(editButton)
-
-
-                        article.appendChild(rightDiv)
-
-                        bodyElement.appendChild(article)
-
-                        
-                    
-                    })
-      
-
-    } else {
-      bodyElement.append(
-        "Daten konnten nicht geladen werden, Status " +
-          xhr.status +
-          " - " +
-          xhr.statusText
-      );
-    }
-  };
-  xhr.open("GET", "/movies");
-  xhr.send();
+			/* When a first button exists, we click it to load all movies. */
+			const firstButton = document.querySelector("nav button");
+			if (firstButton) {
+				firstButton.click();
+			}
+		} else {
+			document.querySelector("body").append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
+		}
+	};
+	xhr.open("GET", "/genres");
+	xhr.send();
 };
+
+function generateGenresButton(genres) {
+	/* Task 1.3. Add the genre buttons to the listElement and 
+			initialize them with a click handler that calls the 
+			loadMovies(...) function above. */
+	const navElement = document.querySelector("nav");
+	const allBtn = document.createElement("button");
+	allBtn.textContent = "All";
+	allBtn.addEventListener("click", () => loadMovies());
+	navElement.appendChild(allBtn);
+
+	for (const genre of genres) {
+		const btn = document.createElement("button");
+		btn.textContent = genre;
+		btn.addEventListener("click", () => loadMovies(genre));
+		navElement.appendChild(btn);
+	}
+}

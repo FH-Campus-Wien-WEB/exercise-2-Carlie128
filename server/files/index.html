@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movies!</title>
-    <link rel="stylesheet" href="index.css" />
-    <script src="index.js"></script>
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Movies</title>
+		<link rel="stylesheet" href="index.css" />
+		<script type="module" src="index.js"></script>
+	</head>
 
-  <body>
-    <div class="container">
-        <h1>Movies!</h1>
-    </div>
-</body> 
-<button type="button" id="setMovie" onclick="window.location.href ='/add.html';">Add new movie</button>
+	<body>
+		<!-- Task 1.1. Add the semantic structure -->
+		<header>
+				<h1>My Movie Database</h1>
+				<br><br>
+				<div>
+				<button id="add-movie-btn" href="add.html">Add Movie</button>
+				</div>
+		</header>
+
+		<nav id="genre-nav"></nav>
+
+		<main id="movie-container">
+				</main>
+
+		<footer>
+				<p>&copy; 2025 Rina Movie Database</p>
+		</footer>
+	</body>
 </html>
