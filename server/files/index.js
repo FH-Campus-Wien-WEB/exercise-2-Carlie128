@@ -18,6 +18,15 @@ function formatRuntime(runtime) {
 	return hours + "h " + minutes + "m";
 }
 
+function addNewMovieButton() {
+	const navElement = document.querySelector("nav");
+	const addButton = document.createElement("button");
+	addButton.id = "addButton";
+	addButton.textContent = "Add Movie";
+	addButton.addEventListener("click", () => location.href = "add.html");
+	navElement.appendChild(addButton);
+}
+
 function appendMovie(movie, element) {
 	new ElementBuilder("article").id(movie.imdbID)
 					.append(new ElementBuilder("img").with("src", movie.Poster))
@@ -108,4 +117,6 @@ function generateGenresButton(genres) {
 		btn.addEventListener("click", () => loadMovies(genre));
 		navElement.appendChild(btn);
 	}
+
+	addNewMovieButton();
 }

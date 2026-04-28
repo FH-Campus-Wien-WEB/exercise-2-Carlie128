@@ -8,15 +8,13 @@ const app = express();
 let movies = movieModel.moviesJson;
 
 // Parse urlencoded bodies
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Serve static content in directory 'files'
 app.use(express.static(path.join(__dirname, 'files')));
 
-/* Task 1.2: Add a GET /genres endpoint:
-	 This endpoint returns a sorted array of all the genres of the movies
-	 that are currently in the movie model.
-*/
+//genres
 app.get('/genres', (req, res) => {
 	const genres = Array.from(
 		new Set(
@@ -27,13 +25,12 @@ app.get('/genres', (req, res) => {
 	res.send(genres);
 });
 
-/* Task 1.4: Extend the GET /movies endpoint:
-	 When a query parameter for a specific genre is given,
-	 return only movies that have the given genre
- */
+//filter genres
 app.get('/movies', function (req, res) {
 	if (req.query.genre) {
-		const filteredMovies = movies.filter(movie => movie.Genres.includes(req.query.genre));
+		const filteredMovies = movies.filter(movie => 
+			movie.Genres && Array.isArray(movie.Genres) && movie.Genres.includes(req.query.genre)
+		);
 		res.send(filteredMovies);
 	}
 	else {
@@ -41,7 +38,7 @@ app.get('/movies', function (req, res) {
 	}
 });
 
-// Configure a 'get' endpoint for a specific movie
+//specific movie
 app.get('/movies/:imdbID', function (req, res) {
 	const id = req.params.imdbID
 	const movie = movies.find(movie => movie.imdbID === id);
@@ -67,6 +64,11 @@ app.put('/movies/:imdbID', function(req, res) {
 		movies[idx] = newMovie;
 		res.sendStatus(200);
 	}
+});
+
+app.post('/movies', function(req, res) {
+	const newMovie = req.body;
+	movies.push(newMovie);
 });
 
 app.listen(3000)

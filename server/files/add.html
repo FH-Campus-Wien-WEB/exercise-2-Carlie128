@@ -6,44 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add Movie</title>
   <link rel="stylesheet" href="edit.css" />
-  <script src="edit.js"></script>
+  <script src="edit.js" defer></script>
 </head>
 
 <body>
   <main>
     <h1>Add Movie</h1>
-    <form>
-      <input id="imdbID" hidden />
-
-      <label for="Title">Title</label>
-      <input id="Title" />
-
-      <label for="Released">Released</label>
-      <input id="Released"  />
-
-      <label for="Runtime">Runtime</label>
-      <input id="Runtime" type="number" />
-
+    <form action="/movies" method="post"> 
+      <input type="hidden" id="imdbID" />
+      <div><label for="Title">Title ↪️</label><input type="text" id="Title" /></div>
+      <div><label for="Released">Released ↪️  </label><input type="date" id="Released" /></div>
+      <div><label for="Runtime">Runtime ↪️  </label><input type="number" id="Runtime" min="0"/></div>
+      <div><label for="Plot">Plot ↪️  </label><textarea row="5" id="Plot"></textarea></div>
+      
       <div>
-        <label for="Genres">Genres</label>
-        <select id="Genres" multiple size="5">
-          <option value="Animation">Animation</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Comedy">Comedy</option>
-          <option value="Fantasy">Fantasy</option>
+        <label for="Genres">Genres ↪️  </label>
+        <select id="Genres" multiple>
           <option value="Action">Action</option>
-          <option value="Mystery">Mystery</option>
-          <option value="Sci-Fi">Sci-Fi</option>
-          <option value="Drama">Drama</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Animation">Animation</option>
           <option value="Biography">Biography</option>
+          <option value="Comedy">Comedy</option>
           <option value="Crime">Crime</option>
           <option value="Documentary">Documentary</option>
+          <option value="Drama">Drama</option>
+          <option value="Family">Family</option>
+          <option value="Fantasy">Fantasy</option>
           <option value="Film Noir">Film Noir</option>
           <option value="History">History</option>
           <option value="Horror">Horror</option>
           <option value="Music">Music</option>
           <option value="Musical">Musical</option>
+          <option value="Mystery">Mystery</option>
           <option value="Romance">Romance</option>
+          <option value="Sci-Fi">Sci-Fi</option>
           <option value="Short Film">Short Film</option>
           <option value="Sport">Sport</option>
           <option value="Superhero">Superhero</option>
@@ -53,36 +49,30 @@
         </select>
       </div>
 
-      <label for="Directors">Directors</label>
-      <input id="Directors"/>
-
-      <label for="Writers">Writers</label>
-      <input id="Writers"/>
-
-      <label for="Actors">Actors</label>
-      <input id="Actors"/>
+      <div><label for="Directors">Directors ↪️  </label><input type="text" id="Directors" /></div>
+      <div><label for="Writers">Writers ↪️  </label><input type="text" id="Writers" /></div>
+      <div><label for="Actors">Actors ↪️  </label><input type="text" id="Actors" /></div>
 
       <div>
         <label for="Plot">Plot</label>
-        <textarea id="Plot" rows="4" ></textarea>
+        <textarea id="Plot" name="Plot" rows="4" ></textarea>
       </div>
-
+      <div>
       <label for="Poster">Poster URL</label>
-      <input id="Poster"  />
-
-      <label for="Metascore">Metascore</label>
-      <input id="Metascore" type="number"  />
-
-      <label for="imdbRating">IMDb Rating</label>
-      <input id="imdbRating" type="number" step="0.1"  />
-
-      <div class="button-row">
-        <button type="button" id="saveButton" onclick="postMovie();">Save</button>
-        <button type="button" id="cancelButton" onclick="window.location.href = '/index.html';">Cancel</button>
+      <input id="Poster" name="Poster" />
       </div>
-      <br>
-      <button type="button" id="seeMovie" onclick="window.location.href ='/index.html';">Back to Movies</button>
-    </form>
+      <div>
+      <label for="Metascore">Metascore</label>
+      <input id="Metascore" name="Metascore" type="number" />
+      </div>
+      <div>
+      <label for="imdbRating">IMDb Rating</label>
+      <input id="imdbRating" name="imdbRating" type="number" step="0.1" />
+      </div>
+      <div>
+        <button type="button" onclick="postMovie()">Save</button>
+        <button type="button" onclick="location.href = 'index.html'">Cancel</button>
+      </div>
   </main>
 </body>
 

@@ -92,6 +92,7 @@ main {
 
 /* Task 3.4. Make the footer's ul a Flexbox container */
 footer {
+	position: static;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -132,4 +133,19 @@ main img {
 	aspect-ratio: 2 / 3; 
 	object-fit: cover;  
 	border-radius: 50%  
+}
+
+#addButton {
+	padding: 8px 16px;
+	font-size: 1em;
+	background-color: rgb(155, 122, 183);
+	border: none;
+	border-radius: 8px;
+	color: white;
+	cursor: pointer;
+	margin-top: 8px;
+}
+
+#addButton:hover {
+	background-color: rgb(113, 93, 172);
 }
